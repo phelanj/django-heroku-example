@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} | HAGS{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="/hags/static/css/post_detail.css" />
+
+  <header class="main sans-serif">
+    {% if request.user.is_staff %}
+    <a class="f6 link br-pill ph3 pv2 mt2 ml2 dib white bg-black" target="_blank" href="/admin/blog/post/{{ post.id }}/change">Edit</a>
+    {% endif %}
+    <div class="mw9 center pa4 pt5-ns ph7-l">
+      <time class="f6 mb2 dib ttu tracked"><small>{{ post.created_on }}</small></time>
+      <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+        <span class="bg-black-90 lh-copy white pv1 ph2 tracked-tight">
+          {{ post.title }}
+        </span>
+      </h3>
+    </div>
+
+
+  </header>
+
+
+
+<main class="main block center mw7 bg-white pa4"> 
+{% comment %} {% if post.image and post.hero_image %}
+<img class="w-100" src="../../{{ post.image.url }}" style="margin-bottom: -3px;"/>
+{% endif %} {% endcomment %}
+<span class="content">{{ post.content | safe }}</span>
+
+{% if post.embed %}
+{{ post.embed | safe }}
+{% endif %}
+</main>
+<script>
+function randColor() {
+    var color;
+    color = Math.floor(Math.random() * 5);
+    console.log(color);
+    switch (color) {
+        case 0:
+            document.body.style.backgroundColor = "red";
+            //TODO : ADD BORDER FOR DEVICES
+            break;
+        case 1:
+            document.body.style.backgroundColor = "#88C132";
+            break;
+        case 2:
+            document.body.style.backgroundColor = "blue";
+            break;
+        case 3:
+            document.body.style.backgroundColor = "yellow";
+            break;
+        case 4:
+            document.body.style.backgroundColor = "orange";
+            break;
+    }
+}
+randColor();
+</script>
+{% endblock %}

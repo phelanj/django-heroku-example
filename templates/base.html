@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+{% load static %}
+  <meta charset="utf-8">
+
+  <title>
+  {% block title %}
+  have a great summer
+  {% endblock %}
+  </title>
+  <meta name="description" content="HAGS">
+  <meta name="author" content="Jack Phelan and Hannah Kelley">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" 
+      type="image/png" 
+      href="/hags/static/favicon-96x96.png" />
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+  <link rel="stylesheet" href="blog/static/css/styles.css" />
+
+</head>
+
+<body>
+<nav class="bg-light-gray pa3 flex justify-between">
+  <a href="/" class="logo no-underline">
+  <span style="-webkit-text-fill-color: #88C132;">H</span>
+  <span style="-webkit-text-fill-color: Red;">A</span>
+  <span style="-webkit-text-fill-color: yellow;">G</span>
+  <span style="-webkit-text-fill-color: Blue;">S</span>
+</a>
+  <a href="/"><div id="smiley" class="rotating"></div></a>
+</nav>
+
+{% block content %}
+{% endblock %}
+<footer class="bg-black pa3 tc w-100">
+<h1 class="mono"><a href="/blog/archive" class="no-underline hover-bg-white ph3" style="-webkit-text-fill-color: white !important; -webkit-text-stroke: 1px black;">oldies</a></h1>
+</footer>
+</body>
+</html>

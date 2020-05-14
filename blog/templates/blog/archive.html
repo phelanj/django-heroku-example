@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<main class="center mw7 block">
+<section class="mh0-l mh2">
+{% for post in posts %}
+  <a href="{% url 'post_detail' post.slug  %}" class="black no-underline" >
+    <article class="flex flex-wrap mv3">
+      <div class="w-30-l w-30-m w-100">
+        <div class="aspect-ratio aspect-ratio--16x9">
+          {% if post.image %}
+            <div class="aspect-ratio--object cover" style="background:url(../../{{ post.image.url }}) center;"></div>
+          {% else %}
+            <div class="aspect-ratio--object cover" style="background:url('http://mrmrs.github.io/photos/001.jpg') center;"></div>
+          {% endif %}
+        </div>
+      </div>
+    <div class="w-70-l w-70-m w-100 ph4">
+      <h1 class="lh-title mv0 fw3">{{ post.title }}</h1>
+      <span class="mono fw1">{{ post.created_on }}</span> 
+    </div>
+    </article>
+  </a>
+{% endfor %}
+</section>
+{% if is_paginated %}
+  <div class="pagination flex mb3 mh0-l mh2">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}" class="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box mr2">
+    <span class="pl1">&laquo;</span>
+      </a>
+    {% else %}
+      <div class="disabled f5 no-underline gray bg-light-gray  inline-flex items-center pa3 ba border-box mr2" style="cursor: not-allowed;"><span>&laquo;</span></div>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <div class="active f5 no-underline white bg-black bg-animate pointer inline-flex items-center pa3 ba border-box mr2">
+        <span>{{ i }} 
+        <span class="sr-only"></span>
+        </span>
+        </div>
+      {% else %}
+        <div><a href="?page={{ i }}" class="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box mr2">{{ i }}</a></div>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box mr2">&raquo;</a>
+    {% else %}
+      <div class="disabled f5 no-underline gray bg-light-gray  inline-flex items-center pa3 ba border-box mr2" style="cursor: not-allowed;"><span>&raquo;</span></div>
+    {% endif %}
+  </div>
+{% endif %}
+
+</main>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<header class="ma3 bb">
+  <h1 class="mono mt0 f2 fw3">{{ flatpage.text }}</h1>
+</header>
+<main>
+  <section class="flex flex-wrap">
+    {% for post in posts %}
+    <a href="{% url 'post_detail' post.slug  %}" class="w-100 w-50-m w-25-l br-ns card mb4 black no-underline">
+        <div class="pa3 pt0">
+          {% comment %} <div class="aspect-ratio aspect-ratio--16x9">
+          {% if post.image %}
+            <div class="aspect-ratio--object cover" style="background:url({{ post.image.url }}) center;"></div>
+          {% else %}
+            <div class="aspect-ratio--object cover" style="background:url(http://mrmrs.github.io/photos/001.jpg) center;"></div>
+          {% endif %}
+          </div> {% endcomment %}
+          <h3 class="mv2">{{ post.title | truncatechars:80 }}</h3>
+          <p class="mono fw3 ma0">{{ post.created_on }}</p>
+        </div>
+    </a>
+    {% endfor %}
+  </section>
+</main>
+{% endblock %}
